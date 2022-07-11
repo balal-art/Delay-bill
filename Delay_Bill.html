@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello, World!</title>
+    <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
+
+    <link rel="stylesheet" href="pyscript-alpha/pyscript.css" />
+    <script defer src="pyscript-alpha/pyscript.min.js"></script>
+  </head>
+
+  <body>
+    <py-title>PyScript Playground</py-title>
+    <py-env>
+
+    </py-env>
+    <py-box widths="2/3;1/6;1/6">
+      <div>Wide Column</div>
+      <div>Narrow Column</div>
+      <div>Narrow Column</div>
+    </py-box>
+    <py-button label="Click me" styles="btn big">
+      def on_click(event):
+      print(event)
+    </py-button>
+    <py-script>
+      print("Let's compute π:")
+      print("hllo'world")
+    </py-script>
+    <!-- <py-repl></py-repl> -->
+  </body>
+
+</html>
