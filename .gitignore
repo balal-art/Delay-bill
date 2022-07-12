@@ -129,12 +129,13 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#coustom
-.vscode/*
-vscode/*
-
-# Local History for Visual Studio Code
-.history/
+# pyscript
+pyscript_alpha/
 
 # Built Visual Studio Code Extensions
 *.vsix
+# Local History for Visual Studio Code
+.history/
+
+.vscode/
+vscode/

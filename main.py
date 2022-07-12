@@ -1,3 +1,4 @@
+from locale import DAY_1
 from xmlrpc.client import DateTime
 import pandas as pd
 from pandas.tseries.offsets import DateOffset
@@ -16,7 +17,7 @@ sys.__stdout__ = sys.stdout
 
 
 class FaDict:
-    
+
     sharh = 'شرح'
     karkard = 'کارکرد'
     kholaseh = 'خلاصه'
