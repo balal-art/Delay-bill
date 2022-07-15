@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>py-script Dilly Bill 5090</title>
+  
+    <!-- pyscript -->
+    <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> -->
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <py-env>
+      - pandas
+      - Jinja2
+      - paths:
+        - /upload_file.py
+        - /test.csv
+    </py-env>
+    <py-script>
+      from js import document, console
+      from pyodide import create_proxy
+      import pandas as pd
+      from pandas.io.formats.style import Styler
+      from upload_file import setup_upload_button, plot_data
+      
+      # setup_upload_button("upload")
+
+      df = pd.read_csv("./test.csv")
+      #df2 = df.head(10).style.set_properties(**{'background-color': 'black',
+      #                                  'color': 'lawngreen',
+      #                                  'border-color': 'white'})
+      s = df.style
+      #s.set_table_styles([
+      #  {'selector': 'th.col_heading', 'props': 'text-align: center;'},
+      #  {'selector': 'th.col_heading.level0', 'props': 'font-size: 1.5em;'},
+      #  {'selector': 'td', 'props': 'text-align: center; font-weight: bold;'},
+      #  ], overwrite=True)
+      html = df.to_html(header=True, classes =["w3-table-all", "w3-hoverable", "Ali_th"])
+      document.getElementById("DataFrame").innerHTML = html
+    </py-script>
+    <div id="main" >
+      <header class="w3-container w3-teal w3-padding-small">
+				<div class="w3-rest">
+					<h1 class="w3-center">Dilly Bill 5090</h1>
+				</div>	
+      </header>
+      <div class="w3-container w3-grey-light ">
+        <p>
+          This example shows how to process a input file event and display the content as an image
+        </p>
+        <br />
+        <label class="w3-text-blue" for="upload">Select a file:</label>
+        <input class="w3-input w3-border w3-round-large" type="file" id="upload" name="upload" accept=".csv ,.txt" startIn="Documents">
+        <br />
+        <p id="filename"></p>
+        <p id="filesize"></p>
+        <div id="DataFrame">
+        </div>
+        <div id="container">
+        </div>
+      </div>
+      <footer class="w3-container w3-teal w3-bottom">
+        <small class="text-muted mt-5 py-3 border-top text-center d-block">Powered by Ali</small>
+      </footer>
+    </div>
+  </body>
+</html>

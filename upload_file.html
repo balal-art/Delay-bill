@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>py-script demos: csv upload form</title>
+  
+    <!-- pyscript -->
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  </head>
+  <body>
+    <h1>py-script : How to read an Image from Local File system using File Upload</h1>
+    <p>Upload a csv File</p>
+    <ol>
+      <li>
+        <label for="upload">File Upload:</label>
+        <input type="file" name="upload" id="upload" accept=".xls, .xlsx, .cvs, .txt">
+      </li>
+    </ol>
+    <p id="content"></p>
+    <py-env>
+      - paths:
+        - /uplod_file.py
+    </py-env>
+    <py-script>
+      import js
+      from uplod_file import main
+      main()
+
+    </py-script>
+    <div id="container">
+    </div>
+  </body>
+</html>

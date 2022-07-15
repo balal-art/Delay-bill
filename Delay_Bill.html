@@ -70,7 +70,7 @@
           
           file = await fileHandle.getFile()
           
-          document.getElementById("filename").innerHTML = 'File Name: ' + file.address
+          document.getElementById("filename").innerHTML = 'File Name: ' + file.path
           document.getElementById("filesize").innerHTML = 'File Size: ' + str(file.size)
           document.getElementById("filetype").innerHTML = 'File Type: ' + str(file.type)
           document.getElementById("filedate").innerHTML = 'File date: ' + str(file.lastModifiedDate)
