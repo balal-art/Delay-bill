@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>py-script Dilly Bill 5090</title>
-  
+
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.2.min.js"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
     <!-- pyscript -->
     <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> -->
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
@@ -14,21 +22,33 @@
   <body>
     <py-env>
       - pandas
+      - numpy
+      - xlrd
       - Jinja2
+      - bokeh
       - paths:
         - /upload_file.py
+        - /pross.py
         - /test.csv
+        - /test.xls
+
     </py-env>
     <py-script>
-      from js import document, console
+      import json
+      from js import bokeh, document, console
       from pyodide import create_proxy
       import pandas as pd
       from pandas.io.formats.style import Styler
+      from bokeh.embed import json_item
+      from bokeh.plotting import figure
+      from bokeh.resources import CDN
       from upload_file import setup_upload_button, plot_data
-      
+      import pross
+
       # setup_upload_button("upload")
 
       df = pd.read_csv("./test.csv")
+      df2 = pross.result
       #df2 = df.head(10).style.set_properties(**{'background-color': 'black',
       #                                  'color': 'lawngreen',
       #                                  'border-color': 'white'})
@@ -38,8 +58,18 @@
       #  {'selector': 'th.col_heading.level0', 'props': 'font-size: 1.5em;'},
       #  {'selector': 'td', 'props': 'text-align: center; font-weight: bold;'},
       #  ], overwrite=True)
-      html = df.to_html(header=True, classes =["w3-table-all", "w3-hoverable", "Ali_th"])
+      html = df2.to_html(header=True, classes =["w3-table-all", "w3-hoverable", "Ali_th"])
       document.getElementById("DataFrame").innerHTML = html
+
+      # create a new plot with default tools, using figure
+      p = figure(plot_width=400, plot_height=400)
+
+      # add a circle renderer with x and y coordinates, size, color, and alpha
+      p.circle([1, 2, 3, 4, 5], [6, 7, 2, 4, 5], size=15, line_color="navy", fill_color="orange", fill_alpha=0.5)
+      p_json = json.dumps(json_item(p, "myplot"))
+
+      Bokeh.embed.embed_item(JSON.parse(p_json))
+
     </py-script>
     <div id="main" >
       <header class="w3-container w3-teal w3-padding-small">
@@ -59,7 +89,7 @@
         <p id="filesize"></p>
         <div id="DataFrame">
         </div>
-        <div id="container">
+        <div id="myplot">
         </div>
       </div>
       <footer class="w3-container w3-teal w3-bottom">
